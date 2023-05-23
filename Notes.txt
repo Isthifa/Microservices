@@ -1,0 +1,47 @@
+Eureka Server ->
+Eureka is a service registry or we can say it is embedded server provided by third party which intergrate with spring frameworkk
+
+main purpose to use eureka : micro service registration and Discovery with spring cloud and netflixs eureka
+
+uses:->
+normally in micro service architecture design 
+we are developing seprate services and exposing eacg api as service endpoint and 
+whenever we required to access other services in simple we are accessing it as 
+rest client using third party api either rest template or client builder
+
+
+@EnableEurekaServer --> which enables the eureka server
+
+
+application properties
+--------------------------
+Server:
+  port:8761
+spring:
+  application:
+    name:Service-Registry
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+
+
+@EnableDiscoveryClient
+
+
+run zipkin in bash -> java -jar -zipkin-server.jar  /-> localhost:9411
+<dependency>
+      <groupId>io.micrometer</groupId>
+      <artifactId>micrometer-tracing-bridge-brave</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.zipkin.reporter2</groupId>
+      <artifactId>zipkin-reporter-brave</artifactId>
+    </dependency>
+
+
